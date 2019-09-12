@@ -1,0 +1,9 @@
+.sideBar {
+  left: 0;
+  background-color: #808080;
+  padding-top: 20px;
+  box-shadow: 0px 0px 4px rgb(0, 0, 0);
+  top: 0;
+  height: 100%;
+  bottom: 0;
+}
