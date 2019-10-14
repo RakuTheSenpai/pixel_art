@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import "./App.css"
+
 import Menu from "../Menu/Menu"
 import ProjectSettings from "../ProjectSettings/ProjectSettings"
+import Project from "../Project/Project"
 
 class App extends Component {
     state = {
@@ -21,13 +23,22 @@ class App extends Component {
                 onMoveToProjectSettingsView={this.handleMoveToProjectSettingsView} />
 
         } else if (this.state.LoadedComponent === 2) {
-            return <ProjectSettings />
+            return <ProjectSettings
+                LoadedComponent={this.state.LoadedComponent}
+                onMoveToProject={this.handleMoveToProject} />
+        } else if (this.state.LoadedComponent === 3) {
+            return <Project />
         }
     }
 
     handleMoveToProjectSettingsView = (LoadedComponent) => {
         console.log("Hi");
         this.setState({ LoadedComponent: 2 })
+    }
+
+    handleMoveToProject = (LoadedComponent) => {
+        console.log("Hello");
+        this.setState({ LoadedComponent: 3 })
     }
 }
 
