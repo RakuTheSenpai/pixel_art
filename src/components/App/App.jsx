@@ -1,52 +1,34 @@
-import React, { Component } from "react";
-import "./App.css";
-import Grid from "../grid/grid";
-import SideBar from "../sideBar/sideBar";
-import { thisExpression } from "@babel/types";
+import React, { Component } from 'react';
+import "./App.css"
+import Menu from "../Menu/Menu"
+import ProjectSettings from "../ProjectSettings/ProjectSettings"
 
 class App extends Component {
-  state = {
-    pixels: Array.from(Array(1600), (x, index) => {
-      return { color: { r: "255", g: "255", b: "255", a: "1" }, id: index };
-    }),
-    height: 400,
-    width: 400,
-    numpixels: 1600,
-    color: { r: "241", g: "112", b: "19", a: "1" }
-  };
-  handleGlobalColorChange = color => {
-    this.setState({ color: color });
-  };
-  handlePixelColorChange = pixel => {
-    const pixels = [...this.state.pixels]; //... Clones array
-    const index = pixels.indexOf(pixel);
-    pixels[index] = { ...pixel };
-    pixels[index].color = this.state.color;
-    this.setState({ pixels });
-  };
-  render() {
-    const { height, width, pixels, color } = this.state;
-    return (
-      <div>
-        <div className="row" style={{ height: "100%" }}>
-          <div className="col-2">
-            <SideBar
-              color={color}
-              onGlobalColorChange={this.handleGlobalColorChange}
-            ></SideBar>
-          </div>
-          <div className="col-4">
-            <Grid
-              gridHeight={height}
-              gridWidth={width}
-              pixels={pixels}
-              onPixelColorChange={this.handlePixelColorChange}
-            ></Grid>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    state = {
+        LoadedComponent: 1
+    }
+    render() {
+        return (<div>
+            {this.renderComponent()}
+        </div>);
+    }
+
+
+    renderComponent() {
+        if (this.state.LoadedComponent === 1) {
+            return <Menu
+                LoadedComponent={this.state.LoadedComponent}
+                onMoveToProjectSettingsView={this.handleMoveToProjectSettingsView} />
+
+        } else if (this.state.LoadedComponent === 2) {
+            return <ProjectSettings />
+        }
+    }
+
+    handleMoveToProjectSettingsView = (LoadedComponent) => {
+        console.log("Hi");
+        this.setState({ LoadedComponent: 2 })
+    }
 }
 
 export default App;
