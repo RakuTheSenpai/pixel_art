@@ -17,7 +17,7 @@ class Pixel extends Component {
             pixel.color.b +
             ")"
         }}
-        onClick={() => onPixelColorChange(this.props.pixel)}
+        onMouseDown={() => onPixelColorChange(this.props.pixel)}
       ></div>
     );
   }
