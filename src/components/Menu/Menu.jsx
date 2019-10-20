@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./Menu.css";
+import "../common.css";
 
 class Menu extends Component {
   state = {};
   render() {
     return (
-      <div className="menu">
+      <div className="center menu">
         <div className="menu-button-container">
           <button
             onClick={() =>
