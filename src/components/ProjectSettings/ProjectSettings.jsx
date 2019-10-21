@@ -1,40 +1,138 @@
 import React, { Component } from 'react';
 
+
+
+
 class ProjectSettings extends Component {
-    state = {}
+    state = {
+        nombre: "",
+        alto: 0,
+        ancho: 0,
+        allFieldsCorrect: false
+
+    }
+
+    handleChangeOfName = (e) => {
+        this.setState({ nombre: e.target.value });
+        this.checkValidInputs(
+            {
+                nombre: e.target.value,
+                ancho: this.state.alto,
+                alto: this.state.ancho
+            }
+        );
+    }
+
+    handleChangeOfHeight = (e) => {
+        this.setState({ alto: e.target.value });
+        this.checkValidInputs(
+            {
+                nombre: this.state.nombre,
+                ancho: e.target.value,
+                alto: this.state.ancho
+            }
+        );
+    }
+
+    handleChangeOfWidth = (e) => {
+        this.setState({ ancho: e.target.value });
+        this.checkValidInputs(
+            {
+                nombre: this.state.nombre,
+                ancho: this.state.alto,
+                alto: e.target.value
+            }
+        );
+
+    }
+
+    checkValidInputs = (currentValues) => {
+
+        if (currentValues.nombre !== "" && currentValues.ancho !== 0 && currentValues.alto !== 0) {
+
+            if (currentValues.alto >= 8 && currentValues.alto <= 128 &&
+                currentValues.ancho >= 8 && currentValues.ancho <= 128) {
+                this.setState({ allFieldsCorrect: true });
+
+            } else {
+                this.setState({ allFieldsCorrect: false });
+            }
+
+
+        } else {
+            this.setState({ allFieldsCorrect: false });
+        }
+
+
+    }
+
+
     render() {
         return (<div>
             <h1>Configuracion de Nuevo Proyecto</h1>
+            <form className="form-inside-input"
+                onSubmit={this.onSubmit}
+                noValidate>
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Nombre del Proyecto</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"
+                            id="basic-addon1">Nombre del Proyecto</span>
+                    </div>
+                    <input type="text"
+                        className="form-control"
+                        placeholder="Nombre del Proyecto"
+                        onChange={this.handleChangeOfName}
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        required />
                 </div>
-                <input type="text" class="form-control " placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
 
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Alto</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"
+                            id="basic-addon1">Alto</span>
+                    </div>
+                    <input type="number"
+                        className="form-control"
+                        placeholder="Alto"
+                        onChange={this.handleChangeOfHeight}
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        required />
                 </div>
-                <input type="number" class="form-control " placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" min="8" max="128" />
-            </div>
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Ancho</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text"
+                            id="basic-addon1">Ancho</span>
+                    </div>
+                    <input type="number"
+                        className="form-control"
+                        placeholder="Ancho"
+                        onChange={this.handleChangeOfWidth}
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        required />
                 </div>
-                <input type="number" class="form-control " placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
 
-            <button
-                className="btn btn-primary btn-sm m-2"
-                onClick={() => this.props.onMoveToProject(this.props.LoadedComponent)}>
-                Crear Proyecto
-            </button>
+                <button
+                    className="btn btn-primary btn-sm m-2"
+                    disabled={!this.state.allFieldsCorrect}
+                    onClick={() => this.props.onMoveToProject(this.props.LoadedComponent)}>
+                    Crear Proyecto
+                </button>
+
+            </form>
+
         </div>);
     }
+
+
 }
+
+
+
+
 
 export default ProjectSettings;
