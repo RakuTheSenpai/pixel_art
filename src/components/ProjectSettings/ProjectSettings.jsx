@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 
-
-
-
 class ProjectSettings extends Component {
     state = {
         nombre: "",
         alto: 0,
         ancho: 0,
         allFieldsCorrect: false
-
     }
 
     handleChangeOfName = (e) => {
@@ -17,8 +13,8 @@ class ProjectSettings extends Component {
         this.checkValidInputs(
             {
                 nombre: e.target.value,
-                ancho: this.state.alto,
-                alto: this.state.ancho
+                alto: this.state.alto,
+                ancho: this.state.ancho
             }
         );
     }
@@ -28,8 +24,8 @@ class ProjectSettings extends Component {
         this.checkValidInputs(
             {
                 nombre: this.state.nombre,
-                ancho: e.target.value,
-                alto: this.state.ancho
+                alto: e.target.value,
+                ancho: this.state.ancho
             }
         );
     }
@@ -39,8 +35,8 @@ class ProjectSettings extends Component {
         this.checkValidInputs(
             {
                 nombre: this.state.nombre,
-                ancho: this.state.alto,
-                alto: e.target.value
+                alto: this.state.alto,
+                ancho: e.target.value
             }
         );
 
@@ -52,7 +48,22 @@ class ProjectSettings extends Component {
 
             if (currentValues.alto >= 8 && currentValues.alto <= 128 &&
                 currentValues.ancho >= 8 && currentValues.ancho <= 128) {
+
                 this.setState({ allFieldsCorrect: true });
+
+                //
+                // En caso de implementar un boton hacia atras, se tendra que cambiar esta parte.
+                //
+
+                const copy = {
+                    nombre: currentValues.nombre,
+                    alto: currentValues.alto,
+                    ancho: currentValues.ancho
+                };
+
+                this.props.updateProjectData(copy);
+
+                //
 
             } else {
                 this.setState({ allFieldsCorrect: false });
@@ -70,60 +81,58 @@ class ProjectSettings extends Component {
     render() {
         return (<div>
             <h1>Configuracion de Nuevo Proyecto</h1>
-            <form className="form-inside-input"
-                onSubmit={this.onSubmit}
-                noValidate>
 
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text"
-                            id="basic-addon1">Nombre del Proyecto</span>
-                    </div>
-                    <input type="text"
-                        className="form-control"
-                        placeholder="Nombre del Proyecto"
-                        onChange={this.handleChangeOfName}
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        required />
+
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"
+                        id="basic-addon1">Nombre del Proyecto</span>
                 </div>
+                <input type="text"
+                    className="form-control"
+                    placeholder="Nombre del Proyecto"
+                    onChange={this.handleChangeOfName}
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    required />
+            </div>
 
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text"
-                            id="basic-addon1">Alto</span>
-                    </div>
-                    <input type="number"
-                        className="form-control"
-                        placeholder="Alto"
-                        onChange={this.handleChangeOfHeight}
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        required />
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"
+                        id="basic-addon1">Alto</span>
                 </div>
+                <input type="number"
+                    className="form-control"
+                    placeholder="Alto"
+                    onChange={this.handleChangeOfHeight}
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    required />
+            </div>
 
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text"
-                            id="basic-addon1">Ancho</span>
-                    </div>
-                    <input type="number"
-                        className="form-control"
-                        placeholder="Ancho"
-                        onChange={this.handleChangeOfWidth}
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        required />
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"
+                        id="basic-addon1">Ancho</span>
                 </div>
+                <input type="number"
+                    className="form-control"
+                    placeholder="Ancho"
+                    onChange={this.handleChangeOfWidth}
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    required />
+            </div>
 
-                <button
-                    className="btn btn-primary btn-sm m-2"
-                    disabled={!this.state.allFieldsCorrect}
-                    onClick={() => this.props.onMoveToProject(this.props.LoadedComponent)}>
-                    Crear Proyecto
+            <button
+                className="btn btn-primary btn-sm m-2"
+                disabled={!this.state.allFieldsCorrect}
+                onClick={() => this.props.onMoveToProject(this.props.LoadedComponent)}>
+                Crear Proyecto
                 </button>
 
-            </form>
+
 
         </div>);
     }
