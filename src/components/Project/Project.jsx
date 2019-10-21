@@ -27,8 +27,8 @@ class Project extends Component {
   render() {
     const { height, width, pixels, color } = this.state;
     return (
-      <div>
-        <div className="row" style={{ height: "100%" }}>
+      <div className="project-background">
+        <div className="row">
           <div className="col-2">
             <SideBar
               color={color}
