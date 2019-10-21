@@ -1,10 +1,19 @@
 .settings {
-  background-color: #a9a9a9;
-  width: 60%;
   height: 60%;
-  padding-left: 5%;
-  padding-right: 5%;
+  min-height: 250px;
 }
 .settings-title {
   margin-bottom: 3%;
+}
+
+.settings-stripe {
+  background-color: #a9a9a9;
+}
+.settings-input {
+  text-align: center;
+  width: 50%;
+  left: 50%;
+  min-width: 575px;
+  transform: translate(-50%);
+  position: absolute;
 }
