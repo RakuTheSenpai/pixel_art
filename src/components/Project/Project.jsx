@@ -8,7 +8,7 @@ import { thisExpression } from "@babel/types";
 class Project extends Component {
   state = {
     pixels: Array.from(Array(this.props.ProjectData.alto * this.props.ProjectData.ancho), (x, index) => {
-      return { color: { r: "255", g: "255", b: "255", a: "1" }, id: index };
+      return { color: { r: "255", g: "255", b: "255", a: "1" }, id: index, transparency: "default-background", };
     }),
     height: this.props.ProjectData.alto * 10,
     width: this.props.ProjectData.ancho * 10,
@@ -26,13 +26,14 @@ class Project extends Component {
       const index = pixels.indexOf(pixel);
       pixels[index] = { ...pixel };
       pixels[index].color = this.state.color;
+      pixels[index].transparency = "";
       this.setState({ pixels });
 
     } else if (this.state.selectedTool === 2) {
       const pixels = [...this.state.pixels]; //... Clones array
       const index = pixels.indexOf(pixel);
       pixels[index] = { ...pixel };
-      pixels[index].color = { r: "255", g: "255", b: "255", a: "1" };;
+      pixels[index].transparency = "default-background";
       this.setState({ pixels });
     }
 
