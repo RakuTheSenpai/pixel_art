@@ -6,7 +6,7 @@ class Pixel extends Component {
     const { pixel, onPixelColorChange } = this.props;
     return (
       <div
-        className="pixel"
+        className={"pixel " + pixel.transparency}
         style={{
           backgroundColor:
             "rgb(" +

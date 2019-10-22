@@ -16,6 +16,10 @@ class SideBar extends Component {
             ></ColorPicker>
           </div>
         </div>
+        <div className="row-2 btn-group btn-block" role="group">
+          <button type="button" onClick={() => this.props.onSelectedTool(1)} className="btn btn-sm  btn-secondary">Brocha</button>
+          <button type="button" onClick={() => this.props.onSelectedTool(2)} className="btn btn-sm  btn-secondary">Borrador</button>
+        </div>
       </div>
     );
   }

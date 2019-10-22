@@ -3,7 +3,75 @@ import "./ProjectSettings.css";
 import "../common.css";
 
 class ProjectSettings extends Component {
-  state = {};
+  state = {
+    nombre: "",
+    alto: 0,
+    ancho: 0,
+    allFieldsCorrect: false
+  };
+
+  handleChangeOfName = e => {
+    this.setState({ nombre: e.target.value });
+    this.checkValidInputs({
+      nombre: e.target.value,
+      alto: this.state.alto,
+      ancho: this.state.ancho
+    });
+  };
+
+  handleChangeOfHeight = e => {
+    this.setState({ alto: e.target.value });
+    this.checkValidInputs({
+      nombre: this.state.nombre,
+      alto: e.target.value,
+      ancho: this.state.ancho
+    });
+  };
+
+  handleChangeOfWidth = e => {
+    this.setState({ ancho: e.target.value });
+    this.checkValidInputs({
+      nombre: this.state.nombre,
+      alto: this.state.alto,
+      ancho: e.target.value
+    });
+  };
+
+  checkValidInputs = currentValues => {
+    if (
+      currentValues.nombre !== "" &&
+      currentValues.ancho !== 0 &&
+      currentValues.alto !== 0
+    ) {
+      if (
+        currentValues.alto >= 8 &&
+        currentValues.alto <= 128 &&
+        currentValues.ancho >= 8 &&
+        currentValues.ancho <= 128
+      ) {
+        this.setState({ allFieldsCorrect: true });
+
+        //
+        // En caso de implementar un boton hacia atras, se tendra que cambiar esta parte.
+        //
+
+        const copy = {
+          nombre: currentValues.nombre,
+          alto: currentValues.alto,
+          ancho: currentValues.ancho
+        };
+
+        this.props.updateProjectData(copy);
+
+        //
+      } else {
+        this.setState({ allFieldsCorrect: false });
+      }
+    } else {
+      this.setState({ allFieldsCorrect: false });
+    }
+  };
+
   render() {
     return (
       <div className="center w-100">
@@ -19,9 +87,11 @@ class ProjectSettings extends Component {
               <input
                 type="text"
                 className="form-control col-7"
-                placeholder="Nombre"
+                placeholder="Nombre del Proyecto"
+                onChange={this.handleChangeOfName}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
+                required
               />
             </div>
 
@@ -34,11 +104,13 @@ class ProjectSettings extends Component {
               <input
                 type="number"
                 className="form-control col-7 "
-                placeholder="8"
+                placeholder="Alto"
+                onChange={this.handleChangeOfHeight}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 min="8"
                 max="128"
+                required
               />
             </div>
 
@@ -51,16 +123,19 @@ class ProjectSettings extends Component {
               <input
                 type="number"
                 className="form-control col-7"
-                placeholder="8"
+                placeholder="Ancho"
+                onChange={this.handleChangeOfWidth}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 min="8"
                 max="128"
+                required
               />
             </div>
 
             <button
               className="btn btn-primary btn-sm m-2"
+              disabled={!this.state.allFieldsCorrect}
               onClick={() =>
                 this.props.onMoveToProject(this.props.LoadedComponent)
               }

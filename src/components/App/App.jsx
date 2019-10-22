@@ -7,11 +7,14 @@ import Project from "../Project/Project"
 
 class App extends Component {
     state = {
-        LoadedComponent: 1
+        LoadedComponent: 1,
+        ProjectData: {
+        }
     }
     render() {
         return (<div>
             {this.renderComponent()}
+            <p>{this.ProjectData}</p>
         </div>);
     }
 
@@ -25,9 +28,11 @@ class App extends Component {
         } else if (this.state.LoadedComponent === 2) {
             return <ProjectSettings
                 LoadedComponent={this.state.LoadedComponent}
+                updateProjectData={this.updateProjectData}
                 onMoveToProject={this.handleMoveToProject} />
         } else if (this.state.LoadedComponent === 3) {
-            return <Project />
+            return <Project
+                ProjectData={this.state.ProjectData} />
         }
     }
 
@@ -37,9 +42,16 @@ class App extends Component {
     }
 
     handleMoveToProject = (LoadedComponent) => {
+
         console.log("Hello");
         this.setState({ LoadedComponent: 3 })
     }
+
+    updateProjectData = (data) => {
+        // console.log(data);
+        this.setState({ ProjectData: data });
+    }
+
 }
 
 export default App;
