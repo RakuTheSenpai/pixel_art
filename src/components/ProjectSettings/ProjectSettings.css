@@ -1,0 +1,20 @@
+.settings {
+  height: 60%;
+  min-height: 250px;
+}
+.settings-title {
+  margin-bottom: 3%;
+  color: rgb(229, 229, 229);
+}
+
+.settings-stripe {
+  background-color: #a9a9a9;
+}
+.settings-input {
+  text-align: center;
+  width: 50%;
+  left: 50%;
+  min-width: 575px;
+  transform: translate(-50%);
+  position: absolute;
+}

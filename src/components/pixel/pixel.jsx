@@ -6,7 +6,7 @@ class Pixel extends Component {
     const { pixel, onPixelColorChange } = this.props;
     return (
       <div
-        className="pixel"
+        className={"pixel " + pixel.transparency}
         style={{
           backgroundColor:
             "rgb(" +
@@ -17,7 +17,7 @@ class Pixel extends Component {
             pixel.color.b +
             ")"
         }}
-        onClick={() => onPixelColorChange(this.props.pixel)}
+        onMouseDown={() => onPixelColorChange(this.props.pixel)}
       ></div>
     );
   }
