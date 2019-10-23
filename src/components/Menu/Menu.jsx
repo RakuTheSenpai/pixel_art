@@ -12,14 +12,14 @@ class Menu extends Component {
             onClick={() =>
               this.props.onMoveToProjectSettingsView(this.props.LoadedComponent)
             }
-            className="btn btn-primary btn-lg menu-button"
+            className="btn btn-secondary btn-lg menu-button"
           >
             Nuevo Proyecto
           </button>
         </div>
         <br></br>
         <div className="menu-button-container">
-          <button className="btn btn-primary btn-lg menu-button">
+          <button className="btn btn-secondary btn-lg menu-button">
             Abrir Proyecto
           </button>
         </div>

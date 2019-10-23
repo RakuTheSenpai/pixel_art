@@ -32,10 +32,3 @@
     transform: rotate(360deg);
   }
 }
-
-.project-background {
-  position: fixed;
-  background-color: #484848;
-  height: 100vh;
-  width: 100vw;
-}

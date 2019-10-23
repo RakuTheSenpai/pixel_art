@@ -55,7 +55,7 @@ class Project extends Component {
   render() {
     const { height, width, pixels, color } = this.state;
     return (
-      <div className="project-background">
+      <div>
         <NavBar nombre={this.props.ProjectData.nombre} />
         <div className="row">
           <div className="col-2">

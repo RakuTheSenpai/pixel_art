@@ -134,7 +134,7 @@ class ProjectSettings extends Component {
             </div>
 
             <button
-              className="btn btn-primary btn-sm m-2"
+              className="btn btn-secondary btn-sm m-2"
               disabled={!this.state.allFieldsCorrect}
               onClick={() =>
                 this.props.onMoveToProject(this.props.LoadedComponent)
