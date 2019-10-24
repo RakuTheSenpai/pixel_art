@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Project.css";
+import "../common.css";
 import Grid from "../grid/grid";
 import SideBar from "../sideBar/sideBar";
 import NavBar from "../NavBar/navbar";
@@ -65,7 +66,7 @@ class Project extends Component {
               onSelectedTool={this.handleSelectedTool}
             ></SideBar>
           </div>
-          <div className="col-4">
+          <div className="col-9 grid-container">
             <Grid
               gridHeight={height}
               gridWidth={width}
