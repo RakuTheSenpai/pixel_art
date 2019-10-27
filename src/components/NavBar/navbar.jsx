@@ -5,7 +5,9 @@ class NavBar extends Component {
   render() {
     return (
       <nav className="navbar navbar-light bg-light">
-        <p className="navbar-brand">{this.props.nombre}</p>
+        <p className="navbar-brand">
+          <u>{this.props.nombre}</u>
+        </p>
         <div className="btn-group" data-toggle="buttons">
           <button
             className="btn btn-primary m-1 disabled"
