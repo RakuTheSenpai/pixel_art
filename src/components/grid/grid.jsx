@@ -21,8 +21,6 @@ class Grid extends Component {
         style={{
           width: gridWidth,
           height: gridHeight
-          // marginLeft: "1%",
-          // paddingTop: "10%"
         }}
       >
         {pixels.map(pixel => this.createPixel(pixel, onPixelColorChange))}

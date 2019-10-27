@@ -4,7 +4,6 @@ import "../common.css";
 import Grid from "../grid/grid";
 import SideBar from "../sideBar/sideBar";
 import NavBar from "../NavBar/navbar";
-import { thisExpression } from "@babel/types";
 
 class Project extends Component {
   state = {
@@ -21,7 +20,7 @@ class Project extends Component {
     height: this.props.ProjectData.alto * 10,
     width: this.props.ProjectData.ancho * 10,
     numpixels: this.props.ProjectData.alto * this.props.ProjectData.ancho,
-    color: { r: "241", g: "112", b: "19", a: "1" },
+    color: { r: "255", g: "255", b: "255", a: "1" },
     selectedTool: 1
   };
   handleGlobalColorChange = color => {
@@ -59,14 +58,14 @@ class Project extends Component {
       <div className="project-container">
         <NavBar nombre={this.props.ProjectData.nombre} />
         <div className="row no-gutters">
-          <div className="col-2">
+          <div className="col-1">
             <SideBar
               color={color}
               onGlobalColorChange={this.handleGlobalColorChange}
               onSelectedTool={this.handleSelectedTool}
             ></SideBar>
           </div>
-          <div className="col-10 grid-container">
+          <div className="col-11 grid-container">
             <Grid
               gridHeight={height}
               gridWidth={width}
