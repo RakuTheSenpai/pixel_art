@@ -56,9 +56,9 @@ class Project extends Component {
   render() {
     const { height, width, pixels, color } = this.state;
     return (
-      <div>
+      <div className="project-container">
         <NavBar nombre={this.props.ProjectData.nombre} />
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col-2">
             <SideBar
               color={color}
@@ -66,7 +66,7 @@ class Project extends Component {
               onSelectedTool={this.handleSelectedTool}
             ></SideBar>
           </div>
-          <div className="col-9 grid-container">
+          <div className="col-10 grid-container">
             <Grid
               gridHeight={height}
               gridWidth={width}
