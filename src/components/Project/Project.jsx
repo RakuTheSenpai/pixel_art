@@ -20,7 +20,7 @@ class Project extends Component {
     height: this.props.ProjectData.alto * 10,
     width: this.props.ProjectData.ancho * 10,
     numpixels: this.props.ProjectData.alto * this.props.ProjectData.ancho,
-    color: { r: "255", g: "255", b: "255", a: "1" },
+    color: { r: "0", g: "0", b: "0", a: "1" },
     selectedTool: 1
   };
   handleGlobalColorChange = color => {

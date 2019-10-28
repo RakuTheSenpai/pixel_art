@@ -60,7 +60,7 @@ class ColorPicker extends React.Component {
         <div style={styles.swatch} onClick={this.handleClick}>
           <div style={styles.color} />
           <div className="pt-2">
-            <span className="icono icono-borrador m-0"></span>
+            <span className="icono icono-paleta m-0"></span>
           </div>
         </div>
         {this.state.displayColorPicker ? (
