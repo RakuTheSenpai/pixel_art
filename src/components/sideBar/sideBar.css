@@ -1,9 +1,31 @@
 .sideBar {
   left: 0;
-  background-color: #808080;
+  background-color: #6c757d;
   padding-top: 20px;
   box-shadow: 0px 0px 4px rgb(0, 0, 0);
   top: 0;
   height: 100%;
   bottom: 0;
+  min-width: 42px;
+}
+
+.icono {
+  height: 32px;
+  width: 32px;
+  display: block;
+}
+.icono-brocha {
+  background: url("../../assets/Lapiz-02.png");
+  background-size: 32px 32px;
+  opacity: 0.65;
+}
+.icono-borrador {
+  background: url("../../assets/Borrador-01.png");
+  background-size: 32px 32px;
+  opacity: 0.65;
+}
+.icono-paleta {
+  background: url("../../assets/GodeteBorde-03.png");
+  background-size: 32px 32px;
+  opacity: 0.65;
 }

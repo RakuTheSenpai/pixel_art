@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import reactCSS from "reactcss";
 import { SketchPicker } from "react-color";
+import "../sideBar/sideBar.css";
 
 class ColorPicker extends React.Component {
   state = {
@@ -27,16 +28,17 @@ class ColorPicker extends React.Component {
           width: "100%",
           height: "100%",
           borderRadius: "2px",
-          background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+          background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`,
+          paddingTop: "100%"
         },
         swatch: {
-          padding: "5px",
           background: "#808080",
           borderRadius: "1px",
           boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
           cursor: "pointer",
           width: "100%",
-          height: "100%"
+          minWidth: "32px",
+          minHeight: "32px"
         },
         popover: {
           position: "absolute",
@@ -54,9 +56,12 @@ class ColorPicker extends React.Component {
     });
 
     return (
-      <div style={{ height: "100%", width: "100%" }}>
+      <div style={{ height: "80%", width: "80%" }} title="Elige color">
         <div style={styles.swatch} onClick={this.handleClick}>
           <div style={styles.color} />
+          <div className="pt-2">
+            <span className="icono icono-paleta m-0"></span>
+          </div>
         </div>
         {this.state.displayColorPicker ? (
           <div style={styles.popover}>

@@ -19,7 +19,10 @@ class Menu extends Component {
         </div>
         <br></br>
         <div className="menu-button-container">
-          <button className="btn btn-secondary btn-lg menu-button">
+          <button
+            className="btn btn-secondary btn-lg menu-button disabled"
+            title="Mis creadores aun no me dan funcionalidad :("
+          >
             Abrir Proyecto
           </button>
         </div>

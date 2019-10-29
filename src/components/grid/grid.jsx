@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Pixel from "../pixel/pixel";
+import "./grid.css";
+import "../common.css";
 class Grid extends Component {
   createPixel = (pixel, onPixelColorChange) => {
     return (
@@ -15,11 +17,10 @@ class Grid extends Component {
     const { gridWidth, gridHeight, pixels, onPixelColorChange } = this.props;
     return (
       <div
+        className="grid center"
         style={{
           width: gridWidth,
-          height: gridHeight,
-          marginLeft: "40%",
-          paddingTop: "10%"
+          height: gridHeight
         }}
       >
         {pixels.map(pixel => this.createPixel(pixel, onPixelColorChange))}

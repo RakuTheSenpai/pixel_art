@@ -92,19 +92,20 @@ class ProjectSettings extends Component {
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 required
+                autoFocus
               />
             </div>
 
             <div className=" no-gutter input-group mb-3">
               <div className="input-group-prepend col-5 px-0">
                 <span className="input-group-text w-100" id="basic-addon1">
-                  Alto
+                  Altura
                 </span>
               </div>
               <input
                 type="number"
                 className="form-control col-7 "
-                placeholder="Alto"
+                placeholder="Pixeles entre 8 y 128"
                 onChange={this.handleChangeOfHeight}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
@@ -123,7 +124,7 @@ class ProjectSettings extends Component {
               <input
                 type="number"
                 className="form-control col-7"
-                placeholder="Ancho"
+                placeholder="Pixeles entre 8 y 128"
                 onChange={this.handleChangeOfWidth}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
