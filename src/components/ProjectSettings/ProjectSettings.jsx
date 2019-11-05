@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import "./ProjectSettings.css";
 import "../common.css";
 
+const MAX_VALUE = 64;
+const MIN_VALUE = 8;
 class ProjectSettings extends Component {
   state = {
     nombre: "",
-    alto: 0,
-    ancho: 0,
+    alto: 8,
+    ancho: 8,
     allFieldsCorrect: false
   };
 
@@ -37,18 +39,26 @@ class ProjectSettings extends Component {
     });
   };
 
+  hasStateChanged() {
+    return this.state.ancho !== 0 && this.state.alto !== 0;
+  }
+  isHeightValid() {
+    return this.isInRange(this.state.alto);
+  }
+  isWidthtValid() {
+    return this.isInRange(this.state.ancho);
+  }
+  isInRange(value) {
+    return value >= MIN_VALUE && value <= MAX_VALUE;
+  }
+
   checkValidInputs = currentValues => {
     if (
       currentValues.nombre !== "" &&
       currentValues.ancho !== 0 &&
       currentValues.alto !== 0
     ) {
-      if (
-        currentValues.alto >= 8 &&
-        currentValues.alto <= 128 &&
-        currentValues.ancho >= 8 &&
-        currentValues.ancho <= 128
-      ) {
+      if (this.isHeightValid() && this.isWidthtValid()) {
         this.setState({ allFieldsCorrect: true });
 
         //
@@ -105,13 +115,14 @@ class ProjectSettings extends Component {
               <input
                 type="number"
                 className="form-control col-7 "
-                placeholder="Pixeles entre 8 y 128"
-                onChange={this.handleChangeOfHeight}
+                placeholder={"Pixeles entre " + MIN_VALUE + " y " + MAX_VALUE}
+                onInput={this.handleChangeOfHeight}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                min="8"
-                max="128"
+                min={MIN_VALUE.toString()}
+                max={MAX_VALUE.toString()}
                 required
+                defaultValue={this.state.alto}
               />
             </div>
 
@@ -124,14 +135,25 @@ class ProjectSettings extends Component {
               <input
                 type="number"
                 className="form-control col-7"
-                placeholder="Pixeles entre 8 y 128"
-                onChange={this.handleChangeOfWidth}
+                placeholder={"Pixeles entre " + MIN_VALUE + " y " + MAX_VALUE}
+                onInput={this.handleChangeOfWidth}
+                // onInvalid={}
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                min="8"
-                max="128"
+                min={MIN_VALUE.toString()}
+                max={MAX_VALUE.toString()}
                 required
+                defaultValue={this.state.ancho}
               />
+            </div>
+            <div
+              className={
+                "text-danger " +
+                (this.isHeightValid() && this.isWidthtValid() ? "d-none" : "")
+              }
+            >
+              Por favor ingrese valores entre {MIN_VALUE} y {MAX_VALUE} para
+              Altura y Ancho.
             </div>
 
             <button
