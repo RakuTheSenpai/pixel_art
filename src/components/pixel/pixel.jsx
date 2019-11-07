@@ -3,7 +3,12 @@ import "./pixel.css";
 
 class Pixel extends Component {
   render() {
-    const { pixel, onPixelColorChange } = this.props;
+    const {
+      pixel,
+      onPixelColorChange,
+      onPixelMouseUp,
+      onPixelMouseDown
+    } = this.props;
     return (
       <div
         className={"pixel " + pixel.transparency}
@@ -17,8 +22,11 @@ class Pixel extends Component {
             pixel.color.b +
             ")"
         }}
-        onMouseDown={() => onPixelColorChange(this.props.pixel)}
-      ></div>
+        draggable={false}
+        onMouseOver={() => onPixelColorChange(this.props.pixel)}
+        onMouseUp={() => onPixelMouseUp()}
+        onMouseDown={() => onPixelMouseDown(this.props.pixel)}
+      />
     );
   }
 }
