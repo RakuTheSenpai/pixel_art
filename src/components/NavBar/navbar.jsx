@@ -12,6 +12,7 @@ class NavBar extends Component {
           <button
             className="btn btn-primary m-1 disabled"
             title="Mis creadores aun no me dan funcionalidad :("
+            onClick={this.props.onSaveProject}
           >
             Guardar
           </button>

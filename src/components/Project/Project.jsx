@@ -39,6 +39,9 @@ class Project extends Component {
       const pixels = [...this.state.pixels]; //... Clones array
       const index = pixels.indexOf(pixel);
       pixels[index] = { ...pixel };
+      // Para que no aparesca el pixel eliminado al exportarlo
+      pixels[index].color = { r: "0", g: "0", b: "0", a: "0" }
+      //
       pixels[index].transparency = "default-background";
       this.setState({ pixels });
     }
@@ -89,6 +92,28 @@ class Project extends Component {
 
 
   }
+
+
+  handleSaveProject = () => {
+
+    const ProjectData = {
+      nombre: this.props.ProjectData.nombre,
+      pixels: { ...this.state.pixels },
+      height: this.state.height,
+      width: this.state.width,
+      numpixels: this.state.numpixels
+
+    }
+    console.log(JSON.stringify(ProjectData));
+
+
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(ProjectData)], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = this.props.ProjectData.nombre + ".pxart";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
   render() {
     const { height, width, pixels, color } = this.state;
     return (
@@ -96,6 +121,7 @@ class Project extends Component {
         <NavBar
           nombre={this.props.ProjectData.nombre}
           onExportImage={this.handleExportImage}
+          onSaveProject={this.handleSaveProject}
         />
 
         <div className="row no-gutters">
