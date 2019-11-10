@@ -11,7 +11,7 @@ class Project extends Component {
       Array(this.props.ProjectData.alto * this.props.ProjectData.ancho),
       (x, index) => {
         return {
-          color: { r: "255", g: "255", b: "255", a: "1" },
+          color: { r: "0", g: "0", b: "0", a: "0" },
           id: index,
           transparency: "default-background"
         };
@@ -52,11 +52,52 @@ class Project extends Component {
     }
   };
 
+
+  handleExportImage = () => {
+
+    var temp_canvas = document.createElement("canvas");
+    temp_canvas.width = this.props.ProjectData.ancho;
+    temp_canvas.height = this.props.ProjectData.alto;
+
+
+    var myContext = temp_canvas.getContext("2d");
+
+    const ImageData = myContext.createImageData(this.props.ProjectData.alto, this.props.ProjectData.ancho);
+
+    for (var i = 0; i < this.props.ProjectData.alto * this.props.ProjectData.ancho; i++) {
+      const pixel = this.state.pixels[i];
+
+      ImageData.data[4 * i + 0] = pixel.color.r;
+      ImageData.data[4 * i + 1] = pixel.color.g;
+      ImageData.data[4 * i + 2] = pixel.color.b;
+      ImageData.data[4 * i + 3] = pixel.color.a * 255;
+
+    }
+
+    // console.log("JAJA", ImageData);
+
+    myContext.putImageData(ImageData, 0, 0);
+
+    var image = temp_canvas.toDataURL("image/png");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+
+    const element = document.createElement("a");
+
+    element.href = image;
+    element.download = this.props.ProjectData.nombre + ".png";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+
+
+  }
   render() {
     const { height, width, pixels, color } = this.state;
     return (
       <div className="project-container">
-        <NavBar nombre={this.props.ProjectData.nombre} />
+        <NavBar
+          nombre={this.props.ProjectData.nombre}
+          onExportImage={this.handleExportImage}
+        />
+
         <div className="row no-gutters">
           <div className="col-1">
             <SideBar
