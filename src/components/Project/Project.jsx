@@ -21,29 +21,41 @@ class Project extends Component {
     width: this.props.ProjectData.ancho * 10,
     numpixels: this.props.ProjectData.alto * this.props.ProjectData.ancho,
     color: { r: "0", g: "0", b: "0", a: "1" },
-    selectedTool: 1
+    selectedTool: 1,
+    pixelClicked: false
   };
   handleGlobalColorChange = color => {
     this.setState({ color: color });
   };
-  handlePixelColorChange = pixel => {
-    console.log(this.state.selectedTool);
-    if (this.state.selectedTool === 1) {
-      const pixels = [...this.state.pixels]; //... Clones array
-      const index = pixels.indexOf(pixel);
-      pixels[index] = { ...pixel };
-      pixels[index].color = this.state.color;
-      pixels[index].transparency = "";
-      this.setState({ pixels });
-    } else if (this.state.selectedTool === 2) {
-      const pixels = [...this.state.pixels]; //... Clones array
-      const index = pixels.indexOf(pixel);
-      pixels[index] = { ...pixel };
-      // Para que no aparesca el pixel eliminado al exportarlo
-      pixels[index].color = { r: "0", g: "0", b: "0", a: "0" }
-      //
-      pixels[index].transparency = "default-background";
-      this.setState({ pixels });
+  handlePixelMouseDown = pixel => {
+    this.setState({ pixelClicked: true });
+    this.handlePixelColorChange(pixel, true);
+  };
+  handlePixelMouseUp = () => {
+    this.setState({ pixelClicked: false });
+  };
+  handleGridMouseOut = () => {
+    this.setState({ pixelClicked: false });
+  };
+  handlePixelColorChange = (pixel, pass) => {
+    if (this.state.pixelClicked || pass !== undefined) {
+      if (this.state.selectedTool === 1) {
+        const pixels = [...this.state.pixels]; //... Clones array
+        const index = pixels.indexOf(pixel);
+        pixels[index] = { ...pixel };
+        pixels[index].color = this.state.color;
+        pixels[index].transparency = "";
+        this.setState({ pixels });
+      } else if (this.state.selectedTool === 2) {
+        const pixels = [...this.state.pixels]; //... Clones array
+        const index = pixels.indexOf(pixel);
+        pixels[index] = { ...pixel };
+        // Para que no aparesca el pixel eliminado al exportarlo
+        pixels[index].color = { r: "0", g: "0", b: "0", a: "0" }
+        //
+        pixels[index].transparency = "default-background";
+        this.setState({ pixels });
+      }
     }
   };
 
@@ -132,12 +144,18 @@ class Project extends Component {
               onSelectedTool={this.handleSelectedTool}
             ></SideBar>
           </div>
-          <div className="col-11 grid-container">
+          <div
+            className="col-11 grid-container"
+            onMouseLeave={() => this.handleGridMouseOut()}
+            draggable={false}
+          >
             <Grid
               gridHeight={height}
               gridWidth={width}
               pixels={pixels}
               onPixelColorChange={this.handlePixelColorChange}
+              onPixelMouseUp={this.handlePixelMouseUp}
+              onPixelMouseDown={this.handlePixelMouseDown}
             ></Grid>
           </div>
         </div>
