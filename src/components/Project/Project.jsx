@@ -62,14 +62,14 @@ class Project extends Component {
     temp_canvas.width = this.props.ProjectData.ancho;
     temp_canvas.height = this.props.ProjectData.alto;
 
-
     var myContext = temp_canvas.getContext("2d");
 
-    const ImageData = myContext.createImageData(this.props.ProjectData.alto, this.props.ProjectData.ancho);
+    const ImageData = myContext.createImageData(this.props.ProjectData.ancho, this.props.ProjectData.alto);
 
     for (var i = 0; i < this.props.ProjectData.alto * this.props.ProjectData.ancho; i++) {
-      const pixel = this.state.pixels[i];
 
+      const pixel = this.state.pixels[i];
+      console.log(pixel.color);
       ImageData.data[4 * i + 0] = pixel.color.r;
       ImageData.data[4 * i + 1] = pixel.color.g;
       ImageData.data[4 * i + 2] = pixel.color.b;
