@@ -58,7 +58,10 @@ class ProjectSettings extends Component {
       currentValues.ancho !== 0 &&
       currentValues.alto !== 0
     ) {
-      if (this.isHeightValid() && this.isWidthtValid()) {
+      if (
+        this.isInRange(currentValues.ancho) &&
+        this.isInRange(currentValues.alto)
+      ) {
         this.setState({ allFieldsCorrect: true });
 
         //
