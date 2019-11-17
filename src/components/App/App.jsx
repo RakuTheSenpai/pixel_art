@@ -4,6 +4,7 @@ import "./App.css";
 import Menu from "../Menu/Menu";
 import ProjectSettings from "../ProjectSettings/ProjectSettings";
 import Project from "../Project/Project";
+import OpenProject from "../OpenProject/OpenProject"
 import "../common.css";
 
 class App extends Component {
@@ -43,7 +44,16 @@ class App extends Component {
         />
       );
     } else if (this.state.LoadedComponent === 3) {
-      return <Project ProjectData={this.state.ProjectData} />;
+      return (<Project
+        ProjectData={this.state.ProjectData} />);
+
+
+    } else if (this.state.LoadedComponent === 4) {
+      console.log("I am here too");
+
+      return (<OpenProject
+        ProjectData={this.state.ProjectData} />)
+
     }
   }
 
@@ -63,7 +73,7 @@ class App extends Component {
   handleOpenProject = LoadedComponent => {
     var input = this.refs.Menu.refs.FileInput;
     input.click();
-    console.log(input);
+    // console.log(input);
   }
 
   readAsText = (inputFile) => {
@@ -90,33 +100,51 @@ class App extends Component {
 
 
     try {
-      console.log("Hola");
+      // console.log("Hola");
       const TextFile = await this.readAsText(file);
-      console.log(TextFile);
+      // console.log(TextFile);
 
-      var ProjectData = JSON.parse(TextFile);
-      console.log(ProjectData);
+      var Data = JSON.parse(TextFile);
+      // console.log(Data);
 
-      if (!ProjectData.hasOwnProperty("nombre") ||
-        !ProjectData.hasOwnProperty("height") ||
-        !ProjectData.hasOwnProperty("width") ||
-        !ProjectData.hasOwnProperty("numpixels") ||
-        !ProjectData.hasOwnProperty("pixels")) {
+      if (!Data.hasOwnProperty("nombre") ||
+        !Data.hasOwnProperty("height") ||
+        !Data.hasOwnProperty("width") ||
+        !Data.hasOwnProperty("numpixels") ||
+        !Data.hasOwnProperty("pixels")) {
 
         throw { message: "Formato del archivo de entrada incorrecto" };
 
       } else {
 
-        this.setState({ ProjectData: ProjectData.nombre });
-        this.setState({ ProjectData: ProjectData.height });
-        this.setState({ ProjectData: ProjectData.width });
-        this.setState({ ProjectData: ProjectData.numpixels });
-        this.setState({ ProjectData: ProjectData.pixels });
+        this.setState({ ProjectData: { nombre: Data.nombre } });
+        this.setState({ ProjectData: { alto: Data.height } });
+        this.setState({ ProjectData: { ancho: Data.width } });
+        this.setState({ ProjectData: { numpixels: Data.numpixels } });
 
+        var px = Object.keys(Data.pixels).map(function (key) {
+          return Data.pixels[key];
+        });
+
+        // console.log(px);
+
+        this.setState({
+          ProjectData: {
+            nombre: Data.nombre,
+            alto: Data.height,
+            ancho: Data.width,
+            pixels: px,
+            numpixels: Data.numpixels
+          }
+        });
+
+        // console.log(Data.pixels);
+
+        this.setState({ LoadedComponent: 4 });
       }
 
     } catch (e) {
-      console.warn(e.message);
+      // console.warn(e.message);
       alert(e.message);
     }
 
