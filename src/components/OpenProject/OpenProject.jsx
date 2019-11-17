@@ -8,8 +8,8 @@ import NavBar from "../NavBar/navbar";
 class OpenProject extends Component {
   state = {
     pixels: this.props.ProjectData.pixels,
-    height: this.props.ProjectData.alto,
-    width: this.props.ProjectData.ancho,
+    height: this.props.ProjectData.alto * 10,
+    width: this.props.ProjectData.ancho * 10,
     numpixels: this.props.ProjectData.numpixels,
     color: { r: "0", g: "0", b: "0", a: "1" },
     selectedTool: 1,
@@ -67,13 +67,14 @@ class OpenProject extends Component {
     temp_canvas.height = this.props.ProjectData.alto;
 
     var myContext = temp_canvas.getContext("2d");
-
+    console.log(this.props.ProjectData.ancho, this.props.ProjectData.alto);
     const ImageData = myContext.createImageData(this.props.ProjectData.ancho, this.props.ProjectData.alto);
 
-    for (var i = 0; i < this.props.ProjectData.alto * this.props.ProjectData.ancho; i++) {
-
+    for (var i = 0; i < this.state.numpixels; i++) {
+      // console.log(this.state.pixels);
       const pixel = this.state.pixels[i];
-      console.log(pixel.color);
+      console.log(pixel);
+      // console.log(pixel.color);
       ImageData.data[4 * i + 0] = pixel.color.r;
       ImageData.data[4 * i + 1] = pixel.color.g;
       ImageData.data[4 * i + 2] = pixel.color.b;

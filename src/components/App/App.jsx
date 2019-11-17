@@ -131,8 +131,8 @@ class App extends Component {
         this.setState({
           ProjectData: {
             nombre: Data.nombre,
-            alto: Data.height,
-            ancho: Data.width,
+            alto: Data.height / 10,
+            ancho: Data.width / 10,
             pixels: px,
             numpixels: Data.numpixels
           }
