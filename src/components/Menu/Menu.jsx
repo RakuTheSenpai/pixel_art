@@ -20,15 +20,21 @@ class Menu extends Component {
         <br></br>
         <div className="menu-button-container">
           <button
-            className="btn btn-secondary btn-lg menu-button disabled"
-            title="Mis creadores aun no me dan funcionalidad :("
+            onClick={() => this.props.onOpenProject(this.props.LoadedComponent)}
+            type="file"
+            className="btn btn-secondary btn-lg menu-button"
           >
             Abrir Proyecto
           </button>
+
+          <input type="file" id="FileInput" ref="FileInput" onChange={this.props.onChange} hidden></input>
+
         </div>
       </div>
     );
   }
 }
+
+
 
 export default Menu;
